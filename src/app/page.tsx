@@ -1,95 +1,161 @@
-import Image from "next/image";
+"use client";
+import React, { useState, useEffect } from "react";
 import styles from "./page.module.css";
+import Grid from "@mui/material/Grid2";
 
-export default function Home() {
+export default function Countdown({ targetDate }: { targetDate: string }) {
+  const [timeLeft, setTimeLeft] = useState<number>(0);
+  const [progress, setProgress] = useState<number>(0);
+
+  const countdownToDate = (targetDate: string) => {
+    const targetTime = new Date(targetDate).getTime();
+
+    const interval = setInterval(() => {
+      const currentTime = new Date().getTime();
+      const remainingTime = targetTime - currentTime;
+
+      if (remainingTime <= 0) {
+        clearInterval(interval);
+        setTimeLeft(0);
+        return;
+      }
+
+      setTimeLeft(remainingTime);
+    }, 1000);
+  };
+  useEffect(() => {
+    countdownToDate("2025-04-01T23:59:59");
+  }, [targetDate]);
+
+  const totalDays = 42;
+  const daysLeft = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+  const daysPassed = totalDays - daysLeft;
+  const progressPercentage = (daysPassed / totalDays) * 100;
+  useEffect(() => {
+    setProgress(progressPercentage);
+  }, [timeLeft]);
+
+  const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+  const hours = Math.floor(
+    (timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+  );
+  const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
   return (
     <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+      <div
+        className={styles.center}
+        style={{
+          fontFamily: "Balonku",
+          fontSize: "50px",
+          textAlign: "center",
+          color: "#ff6d87",
+        }}
+      >
+        Countdown Babi Working!!
+      </div>
+      <div className={styles.progressBar}>
+        <div className={styles.progressBackground}>
+          {Array.from({ length: 100 }).map((_, index) => (
+            <div
+              key={index}
+              className={`${styles.progressStep} ${
+                index < progress / 10 ? styles.completed : ""
+              }`}
+            >
+              {/* แทนที่ dot ด้วยการแสดงพื้นหลังที่แตกต่างกัน */}
+            </div>
+          ))}
         </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        <div className={styles.marker} style={{ left: `${progress}%` }}>
+          <img src="/img/cherry-marker.png" alt="Progress Marker" />
+        </div>
+      </div>
+      <div className={styles.center} style={{ marginTop: "50px" }}>
+        <div className={styles.card}>
+          <div
+            style={{
+              fontSize: "2rem",
+              fontWeight: "bold",
+              display: "flex",
+              fontFamily: "Balonku",
+              color: "#94D980",
+              padding: "20px",
+            }}
+          >
+            <Grid container spacing={4} justifyContent="center">
+              <Grid size={{ xs: 6, md: 2 }}>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                  }}
+                >
+                  <div style={{ fontFamily: "Balonku", color: "#FF813F" }}>
+                    Day
+                  </div>
+                  <span style={{ margin: "0 10px", padding: "5px" }}>
+                    {days}
+                  </span>
+                </div>
+              </Grid>
+
+              <Grid size={{ xs: 6, md: 3 }}>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                  }}
+                >
+                  <div style={{ fontFamily: "Balonku", color: "#FF813F" }}>
+                    Hours
+                  </div>
+                  <span style={{ margin: "0 10px", padding: "5px" }}>
+                    {hours}
+                  </span>
+                </div>
+              </Grid>
+
+              <Grid size={{ xs: 6, md: 3 }}>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                  }}
+                >
+                  <div style={{ fontFamily: "Balonku", color: "#FF813F" }}>
+                    Minutes
+                  </div>
+                  <span style={{ margin: "0 10px", padding: "5px" }}>
+                    {minutes}
+                  </span>
+                </div>
+              </Grid>
+
+              <Grid size={{ xs: 6, md: 4 }}>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                  }}
+                >
+                  <div style={{ fontFamily: "Balonku", color: "#FF813F" }}>
+                    Seconds
+                  </div>
+                  <span style={{ margin: "0 10px", padding: "5px" }}>
+                    {seconds}
+                  </span>
+                </div>
+              </Grid>
+            </Grid>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
