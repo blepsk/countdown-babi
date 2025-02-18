@@ -63,9 +63,7 @@ export default function Countdown({ targetDate }: { targetDate: string }) {
               className={`${styles.progressStep} ${
                 index < progress / 10 ? styles.completed : ""
               }`}
-            >
-              {/* แทนที่ dot ด้วยการแสดงพื้นหลังที่แตกต่างกัน */}
-            </div>
+            ></div>
           ))}
         </div>
         <div className={styles.marker} style={{ left: `${progress}%` }}>

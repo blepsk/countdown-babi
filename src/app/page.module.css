@@ -40,6 +40,9 @@
   justify-content: space-between;
   align-items: center;
   position: relative;
+  border: 2px solid #ffcece;
+  border-radius: 20px;
+  overflow: hidden;
 }
 
 .progressStep {
