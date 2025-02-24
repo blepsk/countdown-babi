@@ -1,7 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  output: "export",
+  basePath: "/your-repo-name", // แก้เป็นชื่อ repository ของคุณ
+  images: {
+    unoptimized: true, // จำเป็นสำหรับ Next.js Export
+  },
 };
 
 export default nextConfig;
