@@ -61,15 +61,33 @@ export default function Countdown({ targetDate }: { targetDate: string }) {
             <div
               key={index}
               className={`${styles.progressStep} ${
-                index < progress / 10 ? styles.completed : ""
+                index < progress ? styles.completed : ""
               }`}
             ></div>
           ))}
         </div>
+        {/* <div style={{ left: `${progress}%`, position: "absolute" }}>
+          {progress.toFixed(0)} %
+        </div> */}
         <div className={styles.marker} style={{ left: `${progress}%` }}>
           <img src="/img/cherry-marker.png" alt="Progress Marker" />
         </div>
       </div>
+      <div className={styles.center}>
+        <div
+          // className={styles.card}
+          style={{
+            fontFamily: "fantasy",
+            fontSize: "24px",
+            color: "rgb(255 98 154)",
+            marginTop: "0px",
+            padding: "0 10px",
+          }}
+        >
+          {progress.toFixed(1)} %
+        </div>
+      </div>
+
       <div className={styles.center} style={{ marginTop: "50px" }}>
         <div className={styles.card}>
           <div
