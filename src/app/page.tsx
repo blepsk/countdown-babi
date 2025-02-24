@@ -3,9 +3,10 @@ import React, { useState, useEffect } from "react";
 import styles from "./page.module.css";
 import Grid from "@mui/material/Grid2";
 
-export default function Countdown({ targetDate }: { targetDate: string }) {
+export default function Countdown() {
   const [timeLeft, setTimeLeft] = useState<number>(0);
   const [progress, setProgress] = useState<number>(0);
+  const [targetDate, setTargetDate] = useState<string>("2025-04-01T23:59:59");
 
   const countdownToDate = (targetDate: string) => {
     const targetTime = new Date(targetDate).getTime();
@@ -24,7 +25,7 @@ export default function Countdown({ targetDate }: { targetDate: string }) {
     }, 1000);
   };
   useEffect(() => {
-    countdownToDate("2025-04-01T23:59:59");
+    countdownToDate(targetDate);
   }, [targetDate]);
 
   const totalDays = 42;
