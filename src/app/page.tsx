@@ -71,7 +71,7 @@ export default function Countdown() {
           {progress.toFixed(0)} %
         </div> */}
         <div className={styles.marker} style={{ left: `${progress}%` }}>
-          <img src="/img/cherry-marker.png" alt="Progress Marker" />
+          <img src="./img/cherry-marker.png" alt="Progress Marker" />
         </div>
       </div>
       <div className={styles.center}>
