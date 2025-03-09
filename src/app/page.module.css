@@ -1,12 +1,12 @@
 @font-face {
   font-family: 'Balonku';
-  src: url('/public/fonts/BalonkuRegular.otf') format('opentype');
+  src: url('/countdown-babi/fonts/BalonkuRegular.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
 }
 
 .page {
-  background-image: url('/public/img/bg-home.png');
+  background-image: url('/countdown-babi/img/bg-home.png');
   background-size: cover;
   background-position: center;
   width: 100vw;
