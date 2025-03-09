@@ -6,7 +6,7 @@ import Grid from "@mui/material/Grid2";
 export default function Countdown() {
   const [timeLeft, setTimeLeft] = useState<number>(0);
   const [progress, setProgress] = useState<number>(0);
-  const [targetDate, setTargetDate] = useState<string>("2025-04-01T23:59:59");
+  const [targetDate, setTargetDate] = useState<string>("2025-03-31T23:00:00");
 
   const countdownToDate = (targetDate: string) => {
     const targetTime = new Date(targetDate).getTime();
